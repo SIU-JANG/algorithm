@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class BOJ_도영이가만든맛있는음식_2961 {
+public class BOJ_도영이가만든맛있는음식_2961_3 {
 	
 	static int N, min;
 	static int[][] src;
