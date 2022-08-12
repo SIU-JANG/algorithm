@@ -2,20 +2,17 @@ package boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class BOJ_도영이가만든맛있는음식_2961 {
 	
 	static int N, min;
 	static int[][] src;
-	static boolean[] select;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		src = new int[N][2];
-		select = new boolean[N];
 		
 		min = Integer.MAX_VALUE;
 		
@@ -25,49 +22,20 @@ public class BOJ_도영이가만든맛있는음식_2961 {
 			src[i][1] = Integer.parseInt(st.nextToken());
 		}
 		
-		subset(0);
-		
 		System.out.println(min);
 	}
 	
-	static void subset(int srcIdx) {
+	static void dfs(int srcIdx, int sinSum, int ssnSum) {
 		if (srcIdx == N) {
-			int sin = 1;
-			int ssn = 0;
-			int cnt = 0;
-			
-			for (int i = 0; i < N; i++) {
-				if (!select[i]) {
-					continue;
-				}
-				
-				sin *= src[i][0];
-				ssn += src[i][1];
-				cnt++;
-			}
-			
-			if (cnt == 0) {
-				return;
-			}
-			
-			min = Math.min(min, Math.abs(sin - ssn));
 			return;
 		}
 		
-		select[srcIdx] = true;
-		subset(srcIdx + 1);
+		int currSin = src[srcIdx][0] * sinSum;
+		int currSsn = src[srcIdx][1] + ssnSum;
 		
-		select[srcIdx] = false;
-		subset(srcIdx + 1);
-	}
-	
-	static class Ingredient {
-		int sour;
-		int bitter;
+		min = Math.min(min, Math.abs(currSin - currSsn));
 		
-		Ingredient(int sour, int bitter) {
-			this.sour = sour;
-			this.bitter = bitter;
-		}
+		dfs(srcIdx + 1, currSin, currSsn);	// 현재 재료 선택 O
+		dfs(srcIdx + 1, sinSum, ssnSum);	// 현재 재료 선택 X
 	}
 }
