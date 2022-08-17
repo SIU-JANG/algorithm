@@ -19,32 +19,30 @@ public class BOJ_Z_1074_recursive {
 		N = (int) Math.pow(2, N);	// N 은 2로 나눌 수 있다.
 		
 		//	분할정복
-		recursive(N);
+		z(0, 0);
 		
 		System.out.println(ans);
 	}
 	
-	static void recursive(int N) {
-		if (N == 1) {
-			return;
-		}
+	static void z(int y, int x) {
+		// 기저 조건
+		if (N == 1) return;
 		
-		if (r < N / 2 && c < N / 2) {
-			ans += (N * N / 4) * 0;
-			recursive(N / 2);
-		} else if (r < N / 2 && c >= N / 2) {
-			ans += (N * N / 4) * 1;
-			c += N / 2;
-			recursive(N / 2);
-		} else if (r >= N / 2 && c < N / 2) {
-			ans += (N * N / 4) * 2;
-			r += N / 2;
-			recursive(N / 2);
-		} else if (r >= N / 2 && c >= N / 2) {
-			ans += (N * N / 4) * 3;
-			r += N / 2;
-			c += N / 2;
-			recursive(N / 2);
+		//		가로, 세로를 반으로 나누어서 4 공간으로 분할
+		N /= 2;
+				
+		//	r, c 가 4 공간 중 어느 곳에 해당하는 지 판단, 각 공간에서 r, c, 값에 따라 ans 값 갱신, 원점 보정
+		if (r < y + N && c < x + N) {	// top-left
+			z(y, x);
+		} else if (r < y + N && c >= x + N) {	// top-right
+			ans += (N * N * 1);
+			z(y, x + N);
+		} else if (r >= y + N && c <x + N) {	// top-right
+			ans += (N * N * 2);
+			z(y + N, x);
+		} else {	// top-right
+			ans += (N * N * 3);
+			z(y + N, x + N);
 		}
 	}
 }
