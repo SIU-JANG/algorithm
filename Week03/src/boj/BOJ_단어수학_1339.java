@@ -23,7 +23,7 @@ public class BOJ_단어수학_1339 {
 			String str = br.readLine();
 			int len = str.length();
 			for (int j = 0; j < str.length(); j++) {
-				alpha[str.charAt(i) - 'A'] += (int)Math.pow(10, len - 1);
+				alpha[str.charAt(j) - 'A'] += (int)Math.pow(10, len - 1);
 				len -= 1;
 			}
 		}
