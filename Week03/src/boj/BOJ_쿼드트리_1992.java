@@ -2,56 +2,63 @@ package boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+import java.io.IOException;
+ 
 public class BOJ_쿼드트리_1992 {
 	
-	static int N;
-	static char[][] map;
+	static int[][] img;
 	static StringBuilder sb = new StringBuilder();
-	
-	public static void main(String[] args) throws Exception {
+ 
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N = Integer.parseInt(br.readLine());
 		
-		map = new char[N][N];
+		int N = Integer.parseInt(br.readLine());
+		img = new int[N][N];
 		
-		for (int i = 0; i < N; i++) {
-			String temp = br.readLine();
-			for (int j = 0; j < N; j++) {
-				map[i][j] = temp.charAt(j);
+		for(int i = 0; i < N; i++) {
+			String str = br.readLine();
+			
+			for(int j = 0; j < N; j++) {
+				img[i][j] = str.charAt(j) - '0';
 			}
 		}
 		
-		compactScreen(0, N - 1, 0, N - 1);
-		
-		System.out.println(sb.toString());
+		QuadTree(0, 0, N);
+		System.out.println(sb);
 	}
 	
-	static void compactScreen(int startX, int endX, int startY, int endY) {
-		sb.append("(");
-		boolean flag = false;
-		for (int i = startX; i <= endX; i++) {
-			for (int j = startY; j <= endY; j++) {
-				if (map[i][j] != map[startX][startY]) {
-					flag = true;
-					break;
+	public static void QuadTree(int x, int y, int size) {
+		
+		if(isPossible(x, y, size)) {
+			sb.append(img[x][y]);
+			return;
+		}
+		
+		int newSize = size / 2;
+		
+		sb.append('(');
+		
+		QuadTree(x, y, newSize);
+		QuadTree(x, y + newSize, newSize);
+		QuadTree(x + newSize, y, newSize);
+		QuadTree(x + newSize, y + newSize, newSize);
+		
+		sb.append(')');
+			
+		
+	}
+	
+	
+	static boolean isPossible(int x, int y, int size) {
+		int value = img[x][y];
+		
+		for(int i = x; i < x + size; i++) {
+			for(int j = y; j < y + size; j++) {
+				if(value != img[i][j]) {
+					return false;
 				}
 			}
-			
-			if (flag) {
-				break;
-			}
 		}
-		
-		if (flag) {
-			compactScreen(startX, endX / 2, startY, endY / 2);
-			compactScreen(startX, endX / 2, (endY / 2) + 1, endY);
-			compactScreen((endX / 2) + 1, endX, startY, endY / 2);
-			compactScreen((endX / 2) + 1, endX, (endY / 2) + 1, endY);
-		} else {
-			sb.append(map[startX][startY]);
-		}
-		
-		sb.append(")");
+		return true;
 	}
 }
