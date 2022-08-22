@@ -46,7 +46,6 @@ public class SWEA_격자판의숫자이어붙이기_2819 {
 	static void dfs(int x, int y, int cnt, String number) {
 		number += Integer.toString(map[x][y]);
 		if (cnt == 7) {
-			System.out.println(number);
 			set.add(number);
 			return;
 		}
