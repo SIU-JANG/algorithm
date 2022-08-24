@@ -3,6 +3,7 @@ package boj;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.StringTokenizer;
 
@@ -28,7 +29,9 @@ public class BOJ_야구_17281 {
 		}
 		
 		while (true) {
-			if (src[3] == 4) check();
+			if (src[3] == 0) {
+				check();
+			}
 			
 			if (!np()) {
 				break;
@@ -41,48 +44,55 @@ public class BOJ_야구_17281 {
 	static void check() {
 		//	점수
 		int score = 0;
-		//	루에 있는 주자를 기록하는 큐
-		Deque<Integer> dq = new ArrayDeque<>();
+		//	루에 있는 주자를 기록하는 배열
+		boolean[] base = new boolean[4];
 		//	출전 선수 순번
 		int idx = 0;
 		//	이닝 반복
 		for (int i = 0; i < N; i++) {
 			//	아웃 카운트 => 3이 되면 다음 이닝
 			int outCount = 0;
-			dq.clear();
+			Arrays.fill(base, false);
 			while (outCount < 3) {
-				while (dq.size() < 3) {
-					dq.addFirst(0);
+				base[0] = true;
+				int behavior = players[i][src[idx]];
+				if (behavior == 0) {
+					outCount++;
+					base[0] = false;
+				} else if (behavior == 1) {
+					if (base[3]) score++;
+					for (int j = 3; j > 0; j--) {
+						base[j] = base[j - 1];
+					}
+					base[0] = false;
+				} else if (behavior == 2) {
+					if (base[3]) score++;
+					if (base[2]) score++;
+					for (int j = 3; j > 1; j--) {
+						base[j] = base[j - 2];
+					}
+					base[1] = false;
+					base[0] = false;
+				} else if (behavior == 3) {
+					if (base[3]) score++;
+					if (base[2]) score++;
+					if (base[1]) score++;
+					base[3] = base[0];
+					base[2] = false;
+					base[1] = false;
+					base[0] = false;
+				} else if (behavior == 4) {
+					if (base[3]) score++;
+					if (base[2]) score++;
+					if (base[1]) score++;
+					if (base[0]) score++;
+					base[3] = false;
+					base[2] = false;
+					base[1] = false;
+					base[0] = false;
 				}
 				
-				dq.addFirst(1);
-				int behavior = players[i][src[idx++]];
-				System.out.println(behavior);
-				if (idx >= 9) idx = 0;
-				switch (behavior) {
-					case 1:
-						if (dq.removeLast() == 1) score++;
-						break;
-					case 2:
-						if (dq.removeLast() == 1) score++;
-						if (dq.removeLast() == 1) score++;
-						break;
-					case 3:
-						if (dq.removeLast() == 1) score++;
-						if (dq.removeLast() == 1) score++;
-						if (dq.removeLast() == 1) score++;
-						break;
-					case 4:
-						if (dq.removeLast() == 1) score++;
-						if (dq.removeLast() == 1) score++;
-						if (dq.removeLast() == 1) score++;
-						if (dq.removeLast() == 1) score++;
-						break;
-					case 5:
-						outCount++;
-						dq.removeFirst();
-						break;
-				}
+				if (++idx >= 9) idx = 0;
 			}
 		}
 		
