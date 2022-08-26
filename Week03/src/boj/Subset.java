@@ -15,8 +15,8 @@ public class Subset {
 	
 	static void subset(int srcIdx) {
 		if (srcIdx == src.length) {
+			// complete code
 			COUNT++;
-			System.out.println(Arrays.toString(select));
 			return;
 		}
 		

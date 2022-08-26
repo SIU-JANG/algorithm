@@ -16,8 +16,8 @@ public class Permutation {
 	
 	static void perm(int tgtIdx) {
 		if (tgtIdx == tgt.length) {
-			COUNT++;
-			System.out.println(Arrays.toString(tgt));
+			// complete code
+			
 			return;
 		}
 		
@@ -27,6 +27,7 @@ public class Permutation {
 			tgt[tgtIdx] = src[i];
 			select[i] = true;
 			perm(tgtIdx + 1);
+			
 			select[i] = false;
 		}
 	}

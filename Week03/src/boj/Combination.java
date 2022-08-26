@@ -9,14 +9,16 @@ public class Combination {
 	static int[] tgt = new int[3];
 	
 	public static void main(String[] args) {
-		comb_2(0, 0);
+		comb(0, 0);
 		System.out.println(COUNT);
 	}
 	
 	static void comb(int srcIdx, int tgtIdx) {
 		if (tgtIdx == tgt.length) {
-			COUNT++;
+			// complete code
 			System.out.println(Arrays.toString(tgt));
+			COUNT++;
+			
 			return;
 		}
 		
