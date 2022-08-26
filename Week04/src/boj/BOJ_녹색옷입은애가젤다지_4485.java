@@ -47,20 +47,24 @@ public class BOJ_녹색옷입은애가젤다지_4485 {
 	}
 	
 	static void dijkstra() {
-		cost[0][0] = map[0][0];
-		checked[0][0] = true;
-		
+		cost[0][0] = map[0][0];		
 		pq.add(new Edge(0, 0, cost[0][0]));
+		
 		while (!pq.isEmpty()) {
 			Edge e = pq.poll();
+			
+			if (checked[e.y][e.x]) continue;
+			checked[e.y][e.x]= true; 
+			
 			for (int d = 0; d < 4; d++) {
 				int nx = e.x + dx[d];
 				int ny = e.y + dy[d];
 				
 				if (nx >= 0 && nx < N && ny >= 0 && ny < N && !checked[nx][ny]) {
-					checked[nx][ny] = true;
-					cost[nx][ny] = e.c + map[nx][ny];
-					pq.add(new Edge(nx, ny, cost[nx][ny]));
+					if (e.c + map[nx][ny] < cost[nx][ny]) {
+						cost[nx][ny] = e.c + map[nx][ny];
+						pq.add(new Edge(nx, ny, cost[nx][ny]));
+					}
 				}
 			}
 		}
