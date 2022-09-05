@@ -4,18 +4,19 @@ import java.util.Arrays;
 
 public class Combination {
 	
-	static int COUNT;
 	static int[] src = { 1, 2, 3, 4, 5 };
 	static int[] tgt = new int[3];
 	
+	static int COUNT;
+	
 	public static void main(String[] args) {
-		comb(0, 0);
+		comb2(0, 0);
+		
 		System.out.println(COUNT);
 	}
 	
 	static void comb(int srcIdx, int tgtIdx) {
-		if (tgtIdx == tgt.length) {
-			// complete code
+		if (tgtIdx == 3) {
 			System.out.println(Arrays.toString(tgt));
 			COUNT++;
 			
@@ -28,14 +29,15 @@ public class Combination {
 		}
 	}
 	
-	static void comb_2(int srcIdx, int tgtIdx) {
-		if (tgtIdx == tgt.length) {
-			COUNT++;
+	static void comb2(int srcIdx, int tgtIdx) {
+		if (tgtIdx == 3) {
 			System.out.println(Arrays.toString(tgt));
+			COUNT++;
+			
 			return;
 		}
 		
-		if (srcIdx == src.length) return; 
+		if (srcIdx == 5) return;
 		
 		tgt[tgtIdx] = src[srcIdx];
 		
