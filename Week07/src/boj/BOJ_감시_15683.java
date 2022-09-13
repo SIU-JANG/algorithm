@@ -38,6 +38,8 @@ public class BOJ_감시_15683 {
 		
 		// dfs를 사용하여 모든 경우를 탐색한다.
 		dfs(0);
+		
+		System.out.println(ans);
 	}
 	
 	static void dfs(int index) {		
@@ -53,10 +55,15 @@ public class BOJ_감시_15683 {
 				
 				// 1번 cctv
 				if (c.index == 1) {
-					// 위 : 0, 우 : 1, 하 : 2, 좌 : 3
+					// 상 : 0, 우 : 1, 하 : 2, 좌 : 3
 					if (c.dir == 0) {
 						while (true) {
 							if (cx < 0) break;
+							
+							if (map[cx][cy] == 6) {
+								checked[cx][cy] = true;
+								break;
+							}
 							
 							checked[cx][cy] = true;
 							cx--;
@@ -65,12 +72,22 @@ public class BOJ_감시_15683 {
 						while (true) {
 							if (cy >= M) break;
 							
+							if (map[cx][cy] == 6) {
+								checked[cx][cy] = true;
+								break;
+							}
+							
 							checked[cx][cy] = true;
 							cy++;
 						}
 					} else if (c.dir == 2) {
 						while (true) {
 							if (cx >= N) break;
+							
+							if (map[cx][cy] == 6) {
+								checked[cx][cy] = true;
+								break;
+							}
 							
 							checked[cx][cy] = true;
 							cx++;
@@ -79,6 +96,11 @@ public class BOJ_감시_15683 {
 						while (true) {
 							if (cy < 0) break;
 							
+							if (map[cx][cy] == 6) {
+								checked[cx][cy] = true;
+								break;
+							}
+							
 							checked[cx][cy] = true;
 							cy--;
 						}
@@ -86,40 +108,407 @@ public class BOJ_감시_15683 {
 				} else if (c.index == 2) {
 					// 2번 cctv
 					// 가로 : 0, 세로 : 1
+					
+					int ccx = cx;
+					int ccy = cy;
+					
 					if (c.dir == 0) {
+						// 우측
 						while (true) {
+							if (ccy >= M) break;
 							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy++;
+						}
+						ccy = cy;
+						// 좌측
+						while (true) {
+							if (ccy < 0) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy--;
 						}
 					} else {
-						
+						// 상
+						while (true) {
+							if (ccx < 0) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx--;
+						}
+						ccx = cx;
+						// 하
+						while (true) {
+							if (ccx >= N) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx++;
+						}
 					}
 				} else if (c.index == 3) {
 					// 3번 cctv
 					// 상우 : 0, 우하 : 1, 하좌 : 2, 좌상 : 3
+					
+					int ccx = cx;
+					int ccy = cy;
+										
 					if (c.dir == 0) {
+						// 상
+						while (true) {
+							if (ccx < 0) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx--;
+						}
 						
+						ccx = cx;
+						
+						// 우
+						while (true) {
+							if (ccy >= M) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy++;
+						}
 					} else if (c.dir == 1) {
-						
+						// 우
+						while (true) {
+							if (ccy >= M) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy++;
+						}
+						ccy = cy;
+						// 하
+						while (true) {
+							if (ccx >= N) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx++;
+						}
 					} else if (c.dir == 2) {
+						// 하
+						while (true) {
+							if (ccx >= N) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx++;
+						}
 						
+						ccx = cx;
+						// 좌
+						while (true) {
+							if (ccy < 0) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy--;
+						}
 					} else {
-						
+						// 좌
+						while (true) {
+							if (ccy < 0) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy--;
+						}
+						ccy = cy;
+						// 상
+						while (true) {
+							if (ccx < 0) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx--;
+						}
 					}
 				} else if (c.index == 4) {
 					// 4번 cctv
 					// 좌상우 : 0, 상우하 : 1, 우하좌 : 2, 하좌상 : 3
+					
+					int ccx = cx;
+					int ccy = cy;
+					
 					if (c.dir == 0) {
-						
+						// 좌
+						while (true) {
+							if (ccy < 0) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy--;
+						}
+						ccy = cy;
+						// 상
+						while (true) {
+							if (ccx < 0) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx--;
+						}
+						ccx = cx;
+						// 우
+						while (true) {
+							if (ccy >= M) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy++;
+						}
 					} else if (c.dir == 1) {
+						// 상
+						while (true) {
+							if (ccx < 0) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx--;
+						}
+						ccx = cx;
 						
+						// 우
+						while (true) {
+							if (ccy >= M) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy++;
+						}
+						
+						ccy = cy;
+						
+						// 하
+						while (true) {
+							if (ccx >= N) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx++;
+						}
 					} else if (c.dir == 2) {
+						// 우
+						while (true) {
+							if (ccy >= M) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy++;
+						}
+						ccy = cy;
+						// 하
+						while (true) {
+							if (ccx >= N) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx++;
+						}
 						
+						ccx = cx;
+						
+						// 좌
+						while (true) {
+							if (ccy < 0) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy--;
+						}
 					} else {
+						// 하
+						while (true) {
+							if (ccx >= N) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx++;
+						}
+						ccx = cx;
+						// 좌
+						while (true) {
+							if (ccy < 0) break;
+							
+							if (map[cx][ccy] == 6) {
+								checked[cx][ccy] = true;
+								break;
+							}
+							
+							checked[cx][ccy] = true;
+							ccy--;
+						}
 						
+						ccy = cy;
+						
+						// 상
+						while (true) {
+							if (ccx < 0) break;
+							
+							if (map[ccx][cy] == 6) {
+								checked[ccx][cy] = true;
+								break;
+							}
+							
+							checked[ccx][cy] = true;
+							ccx--;
+						}
 					}
 				} else {
 					// 5번 cctv
 					// 사방 : 0
+					
+					int ccx = cx;
+					int ccy = cy;
+					
+					// 상
+					while (true) {
+						if (ccx < 0) break;
+						
+						if (map[ccx][cy] == 6) {
+							checked[ccx][cy] = true;
+							break;
+						}
+						
+						checked[ccx][cy] = true;
+						ccx--;
+					}
+					ccx = cx;
+					// 우
+					while (true) {
+						if (ccy >= M) break;
+						
+						if (map[cx][ccy] == 6) {
+							checked[cx][ccy] = true;
+							break;
+						}
+						
+						checked[cx][ccy] = true;
+						ccy++;
+					}
+					ccy = cy;
+					// 하
+					while (true) {
+						if (ccx >= N) break;
+						
+						if (map[ccx][cy] == 6) {
+							checked[ccx][cy] = true;
+							break;
+						}
+						
+						checked[ccx][cy] = true;
+						ccx++;
+					}
+					ccx = cx;
+					// 좌
+					while (true) {
+						if (ccy < 0) break;
+						
+						if (map[cx][ccy] == 6) {
+							checked[cx][ccy] = true;
+							break;
+						}
+						
+						checked[cx][ccy] = true;
+						ccy--;
+					}
 				}
 			}
 			
@@ -127,11 +516,13 @@ public class BOJ_감시_15683 {
 			int sum = 0;
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < M; j++) {
+					if (map[i][j] == 6) continue;
 					if (!checked[i][j]) sum++;
 				}
 			}
 			// 구한 사각지대의 크기와 ans의 값중 작은 값을 ans에 넣는다.
 			ans = Math.min(ans, sum);
+			return;
 		}
 		
 		if (map[camera.get(index).x][camera.get(index).y] == 1) {
