@@ -42,7 +42,7 @@ public class BOJ_상어초등학교_21608 {
 			}
 		}
 		
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < N * N; i++) {
 			list.clear();
 			temp = new int[N][N];
 						
