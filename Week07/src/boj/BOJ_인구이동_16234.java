@@ -2,15 +2,12 @@ package boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-<<<<<<< HEAD
 import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
-=======
->>>>>>> 29cb3cd5c1915c469078fbca7107e904ee976418
 import java.util.StringTokenizer;
 
 public class BOJ_인구이동_16234 {
@@ -24,8 +21,6 @@ public class BOJ_인구이동_16234 {
 	// delta
 	static int[] dx = { 1, -1, 0, 0 };
 	static int[] dy = { 0, 0, 1, -1 };
-	static int N, L, R;
-	static int[][] map;
 	
 	public static void main(String[] args) throws Exception {
 		// 입력
