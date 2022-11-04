@@ -3,7 +3,7 @@ package boj;
 import java.util.*;
 import java.io.*;
 
-class BOJ_╫╨е╦ф╝ец╫ц_19238 {
+class BOJ_Л┼╓М┐─М┼╦М┐²Л▀°_19238 {
     static class Taxi {
         int x, y, move;
 
@@ -51,7 +51,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
             st = new StringTokenizer(br.readLine());
 
             Passenger p = new Passenger();
-            p.id =  i + 2;  // ╨╝юл 1 юл╤С╪╜ 2 ╨нем Ёя╧Ж╦╣
+            p.id =  i + 2;  // О©╫О©╫О©╫О©╫ 1 О©╫л╤О©╫ 2 О©╫О©╫О©╫О©╫ О©╫я╧О©╫О©╫О©╫
             p.sx = Integer.parseInt(st.nextToken());
             p.sy = Integer.parseInt(st.nextToken());
             p.ex = Integer.parseInt(st.nextToken());
@@ -59,7 +59,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
 
             passMap.put(p.id, p);
 
-            // цБ╧ъаЖ╢б ╟Цд║аЖ ╬й╠Б ╤╖╧╝©║ ╦й©║ ╠Б╥о
+            // О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫д║О©╫О©╫ О©╫й╠О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫й©О©╫ О©╫О©╫О©╫
             arr[p.sx][p.sy] = p.id;
         }
 
@@ -67,7 +67,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
         solution();
     }
 
-    // ╦П╣Г ╫б╟╢ю╩ ╣╔╥а╢ы аы╤╖╠НаЖ BFS ╦╕ ╧щ╨╧го╦Г ©╛╥Аюг ╬Гю╩ х╝юнгя╢ы.
+    // О©╫О©╫О©╫ О©╫б╟О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ы╤О©╫О©╫О©╫О©╫О©╫ BFS О©╫О©╫ О©╫щ╨О©╫О©╫о╦О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ х╝О©╫О©╫О©╫я╢О©╫.
     static void solution() {
         while (!passMap.isEmpty()) {
             int toStartFuel = bfs();
@@ -100,12 +100,12 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
         while (!q.isEmpty()) {
             Taxi now = q.poll();
 
-            // юл╣© аъ©║ ©╛╥А╟║ ╤Ё╬НаЖ╦И а╬╥А
+            // О©╫л╣О©╫ О©╫ъ©О©╫ О©╫О©╫О©╫А╟║ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
             if (fuel - now.move < 0) {
                 return Integer.MAX_VALUE;
             }
 
-            // ец╫ц юл╣© ╫ц╟ё╢К╟║ ╢ы╦ё╟М candidates ╟║ юл╧л а╦юГго╦И break
+            // О©╫ц╫О©╫ О©╫л╣О©╫ О©╫ц╟О©╫О©╫К╟║ О©╫ы╦О©╫О©╫О©╫ candidates О©╫О©╫ О©╫л╧О©╫ О©╫О©╫О©╫О©╫О©╫о╦О©╫ break
             if (prevMove != now.move && !candidates.isEmpty()) {
                 break;
             }
@@ -113,7 +113,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
             prevMove = now.move;
 
             if (taken == null) {
-                // ец╫ц╟║ ╨Я╬Нюж╢б ╟Ф©Л ╟║юЕ ╟║╠Н©Н ╫б╟╢ хд╨╦╦╕ ╦╦Ё╙╦И candidates ©║ цъ╟║
+                // О©╫ц╫ц╟О©╫ О©╫О©╫О©╫О©╫ж╢О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫б╟О©╫ О©╫д╨О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ candidates О©╫О©╫ О©╫ъ╟О©╫
                 int id = arr[now.x][now.y];
 
                 if (id > 1) {
@@ -121,7 +121,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
                     candidates.add(p);
                 }
             } else {
-                // ец╫ц©║ ╫б╟╢юл юж╢б ╟Ф©Л ╣╣бЬаЖ╦╕ ╦╦Ё╙╦И а╬╥А
+                // О©╫ц╫ц©О©╫ О©╫б╟О©╫О©╫О©╫ О©╫ж╢О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
                 if (now.x == taken.ex && now.y == taken.ey) {
                     passMap.remove(taken.id);
                     taken = null;
@@ -130,7 +130,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
                 }
             }
 
-            // ╣©╪╜Ё╡╨о юл╣©
+            // О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫л╣О©╫
             for (int i = 0 ; i < 4; i++) {
                 int nx = now.x + dx[i];
                 int ny = now.y + dy[i];
@@ -144,7 +144,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
             }
         }
 
-        // while ╧╝юл Ё║Ё╣╢б╣╔ candidates ©║ ╬ф╧╚╟м╣╣ ╬Ью╦╦И ╨╝©║ ╦╥гТ╪╜ ╣╣╢ч╦Ьгт
+        // while О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫б╣О©╫ candidates О©╫О©╫ О©╫ф╧О©╫О©╫м╣О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ч╦О©╫О©╫О©╫
         if (candidates.isEmpty()) {
             return Integer.MAX_VALUE;
         }
@@ -155,7 +155,7 @@ class BOJ_╫╨е╦ф╝ец╫ц_19238 {
         return prevMove;
     }
 
-    // ╟╟ю╨ ╟е╦╝╦И x ╟║ юш╟М, y ╟║ юшю╨ ╩Г╤Вю╦╥н
+    // О©╫О©╫О©╫О©╫ О©╫е╦О©╫О©╫О©╫ x О©╫О©╫ О©╫ш╟О©╫, y О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫
     static Passenger findNearest(Queue<Passenger> q) {
         Passenger target = q.poll();
 
