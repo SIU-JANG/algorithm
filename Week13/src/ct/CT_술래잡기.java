@@ -14,7 +14,7 @@ public class CT_술래잡기 {
 	static int[] dy = { 0, 1, 0, -1 };
 	
 	// 술래의 위치와 방향 그리고 방향전환을 위한 sCount, sTarget
-	static int sx, sy, sDir, sCount, sTarget = 1, cnt;
+	static int sx, sy, sDir, sCount, sTarget = 1, cnt, total;
 	static boolean isReverse = false;
 	
 	// 도망자들의 위치를 저장한 배열
@@ -24,7 +24,7 @@ public class CT_술래잡기 {
 	static Tree[] trees;
 	
 	// 술래의 좌표를 저장하는 리스트(역순에 사용)
-	static List<Node> orders;
+	// static List<Node> orders;
 	
 	static int answer;
 	
@@ -74,16 +74,15 @@ public class CT_술래잡기 {
 			trees[i] = tree;
 		}
 		
-		orders = new int[n * n];
+		// orders = new int[n * n];
 		
 		// 턴이 끝날 때 까지 반복한다.
 		for (int t = 1; t <= k; t++) {
 
-			System.out.println(sx + ", " + sy);
 			// 도망자들이 움직인다.
 			for (int i = 0; i < m; i++) {
 				int x = fugitives[i].x;
-				if (x == -1) continue;
+				if (x == -100) continue;
 				
 				int y = fugitives[i].y;
 				int dir = fugitives[i].dir;
@@ -143,7 +142,7 @@ public class CT_술래잡기 {
 				cnt = 0;
 			} else if (cnt == 2 && isReverse) {
 				if (sx == n - 1 && sy == n - 1) {
-					cnt = 0;
+					cnt = 1;
 				} else {
 					sTarget--;
 					cnt = 0;					
@@ -174,16 +173,22 @@ public class CT_술래잡기 {
 				int ty3 = ty2 + dy[sDir];
 				
 				// 도망자가 술래의 시야에 있는 경우 잡는다.
-				outer: for (int i = 0; i < m; i++) {
-					if ((fugitives[i].x == tx1 && fugitives[i].y == ty1) || (fugitives[i].x == tx2 && fugitives[i].y == ty2) || (fugitives[i].x == tx3 && fugitives[i].y == ty3)) {
+				boolean flag = false;
+				for (int i = 0; i < m; i++) {
+					if (((fugitives[i].x == tx1 && fugitives[i].y == ty1) || (fugitives[i].x == tx2 && fugitives[i].y == ty2) || (fugitives[i].x == tx3 && fugitives[i].y == ty3)) && fugitives[i].x != -100) {
 						for (int j = 0; j < h; j++) {
 							if (fugitives[i].x == trees[j].x && fugitives[i].y == trees[j].y) {
-								continue outer;
+								flag = true;
+								break;
 							}
 						}
-						count++;
-						// 잡혔다는 표시(x == -1)
-						fugitives[i].x = -1;
+						
+						if (!flag) {
+							count++;
+							total++;
+							// 잡혔다는 표시(x == -100)
+							fugitives[i].x = -100;
+						}
 					}
 				}
 				
@@ -219,16 +224,21 @@ public class CT_술래잡기 {
 				int ty3 = ty2 + dy[sDir];
 				
 				// 도망자가 술래의 시야에 있는 경우 잡는다.
-				outer: for (int i = 0; i < m; i++) {
-					if ((fugitives[i].x == tx1 && fugitives[i].y == ty1) || (fugitives[i].x == tx2 && fugitives[i].y == ty2) || (fugitives[i].x == tx3 && fugitives[i].y == ty3)) {
+				boolean flag = false;
+				for (int i = 0; i < m; i++) {
+					if (((fugitives[i].x == tx1 && fugitives[i].y == ty1) || (fugitives[i].x == tx2 && fugitives[i].y == ty2) || (fugitives[i].x == tx3 && fugitives[i].y == ty3)) && fugitives[i].x != -100) {
 						for (int j = 0; j < h; j++) {
 							if (fugitives[i].x == trees[j].x && fugitives[i].y == trees[j].y) {
-								continue outer;
+								flag = true;
+								break;
 							}
 						}
-						count++;
-						// 잡혔다는 표시(x == -1)
-						fugitives[i].x = -1;
+						if (!flag) {
+							count++;
+							total++;							
+							// 잡혔다는 표시(x == -100)
+							fugitives[i].x = -100;
+						}
 					}
 				}
 				
@@ -246,6 +256,7 @@ public class CT_술래잡기 {
 		}
 		
 		System.out.println(answer);
+		System.out.println(total);
 	}
 	
 	static class Fugitive {
